@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import UserModel from './userModel'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import mongoose, { Date } from 'mongoose'
 import { userInterface } from './userInterface'
 import jwt from 'jsonwebtoken'
