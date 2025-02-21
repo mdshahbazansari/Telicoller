@@ -55,15 +55,15 @@ export const Login = async (req: Request, res: Response) => {
 
     res.cookie('accessToken', accessToken, {
       maxAge: oneDay,
-      domain: process.env.NODE_ENV === 'dev' ? 'localhost' : 'https://telicoller.onrender.com',
-      secure: process.env.NODE_ENV === 'dev' ? false : true,
+      // domain: process.env.NODE_ENV === 'dev' ? 'localhost' : 'https://telicoller.onrender.com',
+      // secure: process.env.NODE_ENV === 'dev' ? false : true,
       httpOnly: true,
     })
 
     res.cookie('refreshToken', refreshToken, {
       maxAge: sevenDay,
-      domain: process.env.NODE_ENV === 'dev' ? 'localhost' : 'https://telicoller.onrender.com',
-      secure: process.env.NODE_ENV === 'dev' ? false : true,
+      // domain: process.env.NODE_ENV === 'dev' ? 'localhost' : 'https://telicoller.onrender.com',
+      // secure: process.env.NODE_ENV === 'dev' ? false : true,
       httpOnly: true,
     })
 
