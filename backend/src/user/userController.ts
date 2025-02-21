@@ -54,18 +54,19 @@ export const Login = async (req: Request, res: Response) => {
     const { accessToken, refreshToken } = getToken(user)
 
     res.cookie('accessToken', accessToken, {
-      maxAge: oneDay,
-      // domain: process.env.NODE_ENV === 'dev' ? 'localhost' : 'https://telicoller.onrender.com',
-      // secure: process.env.NODE_ENV === 'dev' ? false : true,
-      httpOnly: true,
-    })
+  maxAge: oneDay,
+  secure: true, // Always true in production
+  httpOnly: true,
+  sameSite: 'None', // Required for cross-origin requests
+})
 
-    res.cookie('refreshToken', refreshToken, {
-      maxAge: sevenDay,
-      // domain: process.env.NODE_ENV === 'dev' ? 'localhost' : 'https://telicoller.onrender.com',
-      // secure: process.env.NODE_ENV === 'dev' ? false : true,
-      httpOnly: true,
-    })
+res.cookie('refreshToken', refreshToken, {
+  maxAge: sevenDay,
+  secure: true,
+  httpOnly: true,
+  sameSite: 'None',
+})
+
 
     res
       .status(200)
