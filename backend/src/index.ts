@@ -27,7 +27,7 @@ app.listen(PORT, () => {
 
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://telicoller.onrender.com',
     credentials: true,
   })
 )
