@@ -9,13 +9,12 @@ import axios from 'axios'
 axios.defaults.baseURL = 'https://telicoller-backend.onrender.com'
 
 const Home = () => {
-
   return (
     <div className='bg-[#0A1931] text-white'>
       <header className='flex justify-between items-center px-8 py-6 bg-opacity-90'>
         <h1 className='text-3xl font-bold'>Teli-Coller</h1>
         <nav>
-          <ul className='flex space-x-6'>
+          <ul className='flex items-center space-x-6'>
             <li>
               <a href='#' className='hover:text-blue-400'>
                 About Us
@@ -36,8 +35,19 @@ const Home = () => {
                 Contact Us
               </a>
             </li>
+            <li className='border-1 px-4 py-1 rounded bg-blue-500'>
+              <Link
+                href='/login'
+                className=' font-semibold !text-base !text-white '
+              >
+                Login
+              </Link>
+            </li>
             <li>
-              <Link href='/app' className='hover:text-blue-400 font-semibold'>
+              <Link
+                href='/app'
+                className='hover:text-blue-400 !font-semibold !text-base'
+              >
                 App
               </Link>
             </li>

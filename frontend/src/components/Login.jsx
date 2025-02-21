@@ -28,7 +28,7 @@ const Login = () => {
   return (
     <div className='flex justify-center items-center h-screen bg-gray-100'>
       <Card className='w-96 shadow-lg rounded-lg p-6'>
-        <Title level={3} className='text-center'>
+        <Title level={3} className='text-center !py-2'>
           Login
         </Title>
         <Form
@@ -65,13 +65,18 @@ const Login = () => {
               htmlType='submit'
               block
               loading={loading}
-              className='bg-blue-500'
+              className='bg-blue-500 !font-semibold'
             >
               Login
             </Button>
           </Form.Item>
         </Form>
-        <p>Dont have an account <Link to='/signup'>Signup</Link></p>
+        <p className='text-base px-2'>
+          Dont have an account{' '}
+          <Link to='/signup' className='font-semibold'>
+            Signup
+          </Link>
+        </p>
       </Card>
     </div>
   )
