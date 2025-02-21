@@ -58,7 +58,7 @@ const AppLayout = () => {
           </h1>
           <h1 className='text-base text-gray-400'>{session.email}</h1>
           <Tag color='red' className='!px-4 !mt-1 !font-semibold !text-black'>
-            Logout
+            {session ? 'user':'Login first'}
           </Tag>
         </div>
         <Menu
