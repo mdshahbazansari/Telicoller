@@ -58,7 +58,7 @@ export const Login = async (req: Request, res: Response) => {
       // domain: process.env.NODE_ENV === 'dev' ? 'localhost' : process.env.DOMAIN,
       secure: process.env.NODE_ENV === 'dev' ? false : true,
       httpOnly: true,
-       sameSite: "None",
+       sameSite: "none",
     })
 
     res.cookie('refreshToken', refreshToken, {
@@ -66,7 +66,7 @@ export const Login = async (req: Request, res: Response) => {
       // domain: process.env.NODE_ENV === 'dev' ? 'localhost' : process.env.DOMAIN,
       secure: process.env.NODE_ENV === 'dev' ? false : true,
       httpOnly: true,
-      sameSite: "None",
+      sameSite: "none",
     })
 
 
