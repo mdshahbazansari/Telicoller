@@ -81,9 +81,9 @@ const AppLayout = () => {
             icon={collapsed ? <AlignRightOutlined /> : <AlignLeftOutlined />}
             onClick={() => setCollapsed(!collapsed)}
             style={{
-              fontSize: '24px',
-              width: 64,
-              height: 70,
+              fontSize: '20px',
+              width: 60,
+              height: 64,
             }}
           />
         </Header>
