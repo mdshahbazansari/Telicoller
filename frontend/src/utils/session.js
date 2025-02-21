@@ -1,5 +1,5 @@
 import axios from 'axios'
-axios.defaults.baseURL = 'http://localhost:8080'
+axios.defaults.baseURL = 'https://telicoller-backend.onrender.com'
 
 export const session = async () => {
   try {
