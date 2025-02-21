@@ -37,7 +37,7 @@ import { Link } from 'react-router-dom'
 import TextArea from 'antd/es/input/TextArea'
 import moment from 'moment'
 
-axios.defaults.baseURL = 'http://localhost:8080'
+axios.defaults.baseURL = 'https://telicoller-backend.onrender.com'
 
 const { Title, Text } = Typography
 

@@ -4,7 +4,7 @@ import { LockOutlined, MailOutlined } from '@ant-design/icons'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-axios.defaults.baseURL = 'http://localhost:8080'
+axios.defaults.baseURL = 'https://telicoller-backend.onrender.com'
 
 const { Title } = Typography
 

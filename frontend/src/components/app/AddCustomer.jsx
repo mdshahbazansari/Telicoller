@@ -4,7 +4,7 @@ import axios from 'axios'
 import { InboxOutlined, UploadOutlined } from '@ant-design/icons'
 import Dragger from 'antd/es/upload/Dragger'
 
-axios.defaults.baseURL = 'http://localhost:8080'
+axios.defaults.baseURL = 'https://telicoller-backend.onrender.com'
 
 const AddCustomer = () => {
   const [form] = Form.useForm()

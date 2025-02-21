@@ -4,19 +4,8 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  server: {
-    port: 3000,
-  },
+  base: '/', 
   build: {
     outDir: 'dist',
-  },
-  base: '/',
-  resolve: {
-    alias: {
-      '@': '/src',
-    },
-  },
-  esbuild: {
-    jsxInject: `import react from 'react'`,
   },
 })

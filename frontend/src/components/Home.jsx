@@ -6,7 +6,7 @@ import useSWR from 'swr'
 import fetcher from '../utils/fetcher'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://localhost:8080'
+axios.defaults.baseURL = 'https://telicoller-backend.onrender.com'
 
 const Home = () => {
 
