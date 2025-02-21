@@ -1,6 +1,9 @@
-import './App.css'
+import { useEffect, useState } from 'react'
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
+import axios from 'axios'
+import ReactGA from 'react-ga4'
+import Context from './utils/Context'
 import Home from './components/Home'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import AppLayout from './components/app/Layout'
@@ -8,45 +11,67 @@ import Dashboard from './components/app/Dashboard'
 import Customers from './components/app/Customers'
 import Logs from './components/app/Logs'
 import AddCustomer from './components/app/AddCustomer'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import Context from './utils/Context'
-import ReactGA from 'react-ga4'
 
+const TRACKING_ID = 'G-HDGTE70FV3' // Replace with your actual GA4 tracking ID
 
+ReactGA.initialize(TRACKING_ID)
+
+const TrackPageView = () => {
+  const location = useLocation()
+
+  useEffect(() => {
+    ReactGA.send({ hitType: 'pageview', page: location.pathname })
+  }, [location])
+
+  return null
+}
 
 function App() {
   const [session, setSession] = useState({})
+  const [user, setUser] = useState(null)
 
-  ReactGA.initialize([
-    {
-      trackingId: "your GA measurement id",
-      gaOptions: 'hello', // optional
-      gtagOptions: 'telicoller', // optional
-    },
-    {
-      trackingId: "your second GA measurement id",
-    },
-  ]);
-
-  const Session = async () => {
+  const fetchSession = async () => {
     try {
       const { data } = await axios.get('/api/user/session', {
         withCredentials: true,
       })
       setSession(data)
+
+      if (data?.user) {
+        setUser(data.user) // Store user info
+        trackUserLogin(data.user) // Send login event to GA4
+      }
     } catch (error) {
-      throw new Error(error)
+      console.error('Error fetching session:', error)
     }
   }
 
+  const trackUserLogin = (user) => {
+    ReactGA.set({ userId: user.id }) // Set user ID for GA4 tracking
+    ReactGA.event({
+      category: 'User',
+      action: 'Login',
+      label: 'User Logged In',
+      value: 1,
+    })
+
+    // Capture organic traffic and source
+    ReactGA.send({
+      hitType: 'event',
+      eventCategory: 'Traffic Source',
+      eventAction: 'Organic Traffic',
+      eventLabel: document.referrer || 'Direct',
+    })
+  }
+
   useEffect(() => {
-    Session()
+    fetchSession()
   }, [])
 
   return (
     <Context.Provider value={{ session, setSession }}>
       <BrowserRouter>
+        <TrackPageView />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
