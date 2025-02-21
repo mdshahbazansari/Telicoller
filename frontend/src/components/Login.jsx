@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Form, Input, Button, Card, Typography, message } from 'antd'
 import { LockOutlined, MailOutlined } from '@ant-design/icons'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 axios.defaults.baseURL = 'https://telicoller-backend.onrender.com'
 
@@ -71,6 +71,7 @@ const Login = () => {
             </Button>
           </Form.Item>
         </Form>
+        <p>Dont have an account <Link to='/signup'>Signup</Link></p>
       </Card>
     </div>
   )
