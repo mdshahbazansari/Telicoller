@@ -71,7 +71,7 @@ export const Login = async (req: Request, res: Response) => {
       .status(200)
       .json({ message: 'Login success', refreshToken, accessToken })
   } catch (err: any) {
-    res.status(500).json(err)
+    res.status(500).json(err.message)
   }
 }
 
