@@ -24,7 +24,7 @@ const AddCustomer = () => {
   const props = {
     name: 'file',
     multiple: true,
-    action: 'http://localhost:8080/api/customers/read-file',
+    action: 'https://telicoller-backend.onrender.com/api/customers/read-file',
     onChange(info) {
       const { status } = info.file
       if (status !== 'uploading') {
