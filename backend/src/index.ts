@@ -20,7 +20,7 @@ import customerRouter from './customer.ts/customerRoutes'
 import callingRouter from './calls/callingRoutes'
 
 const app = express()
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 8080
 app.listen(PORT, () => {
   console.log(`Server run on PORT : ${PORT} 👈🏻`)
 })
