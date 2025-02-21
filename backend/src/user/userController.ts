@@ -53,19 +53,21 @@ export const Login = async (req: Request, res: Response) => {
 
     const { accessToken, refreshToken } = getToken(user)
 
-        res.cookie('accessToken', accessToken, {
-        maxAge: oneDay,
-        secure: true, // Always true in production
-        httpOnly: true,
-        sameSite: 'None', // Required for cross-origin requests
-      })
-    
-      res.cookie('refreshToken', refreshToken, {
-        maxAge: sevenDay,
-        secure: true,
-        httpOnly: true,
-        sameSite: 'None',
-      })
+     res.cookie('accessToken', accessToken, {
+      maxAge: oneDay,
+      // domain: process.env.NODE_ENV === 'dev' ? 'localhost' : process.env.DOMAIN,
+      secure: process.env.NODE_ENV === 'dev' ? false : true,
+      httpOnly: true,
+       sameSite: "None",
+    })
+
+    res.cookie('refreshToken', refreshToken, {
+      maxAge: sevenDay,
+      // domain: process.env.NODE_ENV === 'dev' ? 'localhost' : process.env.DOMAIN,
+      secure: process.env.NODE_ENV === 'dev' ? false : true,
+      httpOnly: true,
+      sameSite: "None",
+    })
 
 
     res
