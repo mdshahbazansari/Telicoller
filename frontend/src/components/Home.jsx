@@ -19,19 +19,19 @@ const Home = () => {
             {['About Us', 'Services', 'Help Center', 'Contact Us'].map(
               (item, index) => (
                 <li key={index}>
-                  <Link href='#' className='hover:text-blue-400'>
+                  <Link href='#' className='hover:text-blue-400 !text-white'>
                     {item}
                   </Link>
                 </li>
               )
             )}
-            <li className='border-1 px-4 py-2 rounded bg-blue-500'>
-              <Link href='/login' className='font-semibold text-base text-white'>
+            <li className='border-1 px-4 py-2 rounded bg-blue-500 !text-white'>
+              <Link href='/login' className='font-semibold !text-base !text-white'>
                 Login
               </Link>
             </li>
             <li>
-              <Link href='/app' className='hover:text-blue-400 font-semibold text-base'>
+              <Link href='/app' className='hover:text-blue-400 !font-semibold !text-base'>
                 App
               </Link>
             </li>
