@@ -46,16 +46,25 @@ function App() {
     }
   }
 
+  // ✅ Track user login with email in GA4
   const trackUserLogin = (user) => {
-    ReactGA.set({ userId: user.id }) // Set user ID for GA4 tracking
+    if (!user || !user.email) return
+
+    // Set user ID and email as user properties in GA4
+    ReactGA.set({
+      userId: user.id,
+      email: user.email, // GA4 User Property
+    })
+
+    // Log the login event
     ReactGA.event({
       category: 'User',
       action: 'Login',
-      label: 'User Logged In',
+      label: `User Logged In: ${user.email}`,
       value: 1,
     })
 
-    // Capture organic traffic and source
+    // Capture traffic source (Organic, Direct, etc.)
     ReactGA.send({
       hitType: 'event',
       eventCategory: 'Traffic Source',
