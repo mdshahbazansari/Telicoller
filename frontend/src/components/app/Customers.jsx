@@ -183,96 +183,111 @@ const Customers = () => {
     {
       title: 'Mobile',
       dataIndex: 'mobile',
-      render: (_, customer) => (
-        <div className='flex items-center gap-2'>
-          <Popover
-            content={
-              <div>
-                <div className='mb-2 border-b pb-2'>
-                  <p className='font-semibold text-lg'>
-                    <span className='font-medium'>Name:</span>
-                    {customer.fullname}
-                  </p>
-                  <p className='text-sm text-gray-600'>
-                    <span className='font-medium'>Email:</span> {customer.email}
-                  </p>
-                  <p className='text-sm text-gray-600'>
-                    <span className='font-medium'>Mobile:</span>{' '}
-                    {customer.mobile}
-                  </p>
-                  <p className='text-sm font-medium mt-1'>
-                    Status: <span className='text-blue-500'>{callingText}</span>
-                  </p>
-                  
-                </div>
-                <Form
-                  form={form}
-                  onFinish={() => (openPopoverId ? endCall() : endCallUpdate())}
-                  layout='vertical'
-                  className='w-60 p-2 rounded-md !space-y-3'
-                >
-                  <Form.Item name='followup'>
-                    <DatePicker className='w-full' placeholder='Select date' />
-                  </Form.Item>
+      render: (_, customer) => {
+        const maskedMobile =
+          customer.mobile && customer.mobile.length === 10
+            ? `XXXX${customer.mobile.slice(-6)}`
+            : customer.mobile // Ensures handling for invalid numbers
 
-                  <Form.Item name='notes'>
-                    <TextArea rows={1} placeholder='Enter notes...' />
-                  </Form.Item>
-
-                  <Form.Item name='status'>
-                    <Select placeholder='Select status'>
-                      <Select.Option value='waiting'>Waiting</Select.Option>
-                      <Select.Option value='not received'>
-                        Not received
-                      </Select.Option>
-                      <Select.Option value='switched off'>
-                        Switched Off
-                      </Select.Option>
-                      <Select.Option value='not reachable'>
-                        Not reachable
-                      </Select.Option>
-                      <Select.Option value='called'>Called</Select.Option>
-                    </Select>
-                  </Form.Item>
-
-                  <Button
-                    danger
-                    type='primary'
-                    htmlType='submit'
-                    icon={<PhoneFilled />}
-                    className='w-full'
+        return (
+          <div className='flex items-center gap-2'>
+            <Popover
+              content={
+                <div>
+                  <div className='mb-2 border-b pb-2'>
+                    <p className='font-semibold text-lg'>
+                      <span className='font-medium'>Name:</span>{' '}
+                      {customer.fullname}
+                    </p>
+                    <p className='text-sm text-gray-600'>
+                      <span className='font-medium'>Email:</span>{' '}
+                      {customer.email}
+                    </p>
+                    <p className='text-sm text-gray-600'>
+                      <span className='font-medium'>Mobile:</span>{' '}
+                      {maskedMobile}
+                    </p>
+                    <p className='text-sm font-medium mt-1'>
+                      Status:{' '}
+                      <span className='text-blue-500'>{callingText}</span>
+                    </p>
+                  </div>
+                  <Form
+                    form={form}
+                    onFinish={() =>
+                      openPopoverId ? endCall() : endCallUpdate()
+                    }
+                    layout='vertical'
+                    className='w-60 p-2 rounded-md !space-y-3'
                   >
-                    End Call
-                  </Button>
-                </Form>
-              </div>
-            }
-            title='Call Details'
-            trigger='click'
-            open={openPopoverId === customer._id}
-            onOpenChange={(newOpen) => handleOpenChange(newOpen, customer._id)}
-          >
-            <Button
-              icon={<PhoneFilled />}
-              className='!bg-blue-200 !text-blue-600 !text-xl'
-            />
-          </Popover>
+                    <Form.Item name='followup'>
+                      <DatePicker
+                        className='w-full'
+                        placeholder='Select date'
+                      />
+                    </Form.Item>
 
-          {editingId === customer._id ? (
-            <Form.Item
-              name='mobile'
-              rules={[
-                { required: true, message: 'Required!' },
-                { pattern: /^[0-9]{10}$/, message: 'Invalid phone number!' },
-              ]}
+                    <Form.Item name='notes'>
+                      <TextArea rows={1} placeholder='Enter notes...' />
+                    </Form.Item>
+
+                    <Form.Item name='status'>
+                      <Select placeholder='Select status'>
+                        <Select.Option value='waiting'>Waiting</Select.Option>
+                        <Select.Option value='not received'>
+                          Not received
+                        </Select.Option>
+                        <Select.Option value='switched off'>
+                          Switched Off
+                        </Select.Option>
+                        <Select.Option value='not reachable'>
+                          Not reachable
+                        </Select.Option>
+                        <Select.Option value='called'>Called</Select.Option>
+                      </Select>
+                    </Form.Item>
+
+                    <Button
+                      danger
+                      type='primary'
+                      htmlType='submit'
+                      icon={<PhoneFilled />}
+                      className='w-full'
+                    >
+                      End Call
+                    </Button>
+                  </Form>
+                </div>
+              }
+              title='Call Details'
+              trigger='click'
+              open={openPopoverId === customer._id}
+              onOpenChange={(newOpen) =>
+                handleOpenChange(newOpen, customer._id)
+              }
             >
-              <Input />
-            </Form.Item>
-          ) : (
-            <h1 className='text-base font-medium'>{customer.mobile}</h1>
-          )}
-        </div>
-      ),
+              <Button
+                icon={<PhoneFilled />}
+                className='!bg-blue-200 !text-blue-600 !text-xl'
+              />
+            </Popover>
+
+            {editingId === customer._id ? (
+              <Form.Item
+                name='mobile'
+                rules={[
+                  { required: true, message: 'Required!' },
+                  { pattern: /^[0-9]{10}$/, message: 'Invalid phone number!' },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+            ) : (
+              <h1 className='text-base font-medium'>{maskedMobile}</h1>
+            )}
+          </div>
+        )
+      },
     },
     {
       title: 'createdAt',
