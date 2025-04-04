@@ -3,6 +3,7 @@ import {
   AlignLeftOutlined,
   AlignRightOutlined,
   AppstoreOutlined,
+  LoginOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PhoneFilled,
@@ -11,7 +12,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import { Avatar, Button, Layout, Menu, Tag, theme } from 'antd'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Navigate, Outlet } from 'react-router-dom'
 import Context from '../../utils/Context'
 const { Header, Sider, Content } = Layout
 
@@ -36,6 +37,11 @@ const item = [
     icon: <PhoneFilled className='!font-semibold !text-2xl' />,
     label: <Link to='/app/logs'>Call & Logs</Link>,
   },
+  {
+    key: 'Logout',
+    icon: <LoginOutlined className='!font-semibold !text-2xl' />,
+    label: <Link to='/'>Logout</Link>,
+  },
 ]
 const AppLayout = () => {
   const { session, setSession } = useContext(Context)
@@ -57,9 +63,6 @@ const AppLayout = () => {
             {session.fullname}
           </h1>
           <h1 className='text-base text-gray-400'>{session.email}</h1>
-          <Tag color='red' className='!px-4 !mt-1 !font-semibold !text-black'>
-            {session ? 'user':'Login first'}
-          </Tag>
         </div>
         <Menu
           theme='dark'
@@ -81,9 +84,9 @@ const AppLayout = () => {
             icon={collapsed ? <AlignRightOutlined /> : <AlignLeftOutlined />}
             onClick={() => setCollapsed(!collapsed)}
             style={{
-              fontSize: '20px',
-              width: 60,
-              height: 64,
+              fontSize: '24px',
+              width: 64,
+              height: 70,
             }}
           />
         </Header>
