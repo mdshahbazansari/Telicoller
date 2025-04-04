@@ -186,7 +186,7 @@ const Customers = () => {
       render: (_, customer) => {
         const maskedMobile =
           customer.mobile && customer.mobile.length === 10
-            ? `XXXX${customer.mobile.slice(-6)}`
+            ? `XXXXXX${customer.mobile.slice(-4)}`
             : customer.mobile // Ensures handling for invalid numbers
 
         return (
